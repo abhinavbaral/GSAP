@@ -22,6 +22,7 @@ tl.from("ul", {
   stagger: 0.5,
 });
 
+// Curve Line like spring effect deko 
 const string = document.querySelector("#curve");
 let initialPath = "M 10 100 Q 500 100 1000 100";
 let currentPath = initialPath;
@@ -34,12 +35,12 @@ string.addEventListener("mousemove", function(e) {
   });
 });
 
-// Reset path to final position with a spring effect
+
 string.addEventListener("mouseleave", function() {
   gsap.to("svg path", {
     attr: { d: initialPath
      },
     duration: 1.5,
-    ease: "elastic.out(1, 0.75)" // Simulates a spring-like effect
+    ease: "elastic.out(1, 0.75)" 
   });
 });
