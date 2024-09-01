@@ -22,28 +22,24 @@ tl.from("ul", {
   stagger: 0.5,
 });
 
-
-let Path = "M 10 100 Q 500 100 1000 100";
-let finalPath = "M 10 100 Q 500 100 1000 100";
-
 const string = document.querySelector("#curve");
+let initialPath = "M 10 100 Q 500 100 1000 100";
+let currentPath = initialPath;
 string.addEventListener("mousemove", function(e) {
-  let Path = `M 10 100 Q ${e.x} ${e.y} 1000 100`;
-
- 
-  
+  currentPath = `M 10 100 Q ${e.x} ${e.y} 1000 100`
   gsap.to("svg path", {
-    attr: { d: Path },
-     duration: 1.5, 
+    attr: { d: currentPath },
+    duration: 0.5,
     ease: "power3.out"
   });
 });
 
+// Reset path to final position with a spring effect
 string.addEventListener("mouseleave", function() {
- 
   gsap.to("svg path", {
-    attr: { d: finalPath },
-    duration: 0.5, 
-    ease: "elastic.out(1, 0.5)"
+    attr: { d: initialPath
+     },
+    duration: 1.5,
+    ease: "elastic.out(1, 0.75)" // Simulates a spring-like effect
   });
-  });
+});
