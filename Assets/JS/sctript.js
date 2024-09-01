@@ -1,28 +1,4 @@
-// gsap.to("#box1", {
-//   x: 1500,
-//   duration: 1.5,
-//   delay: 1,
-//   repeat: -1,
-//   yoyo: true,
-// });
-
-// gsap.to("#box2", {
-//   x: 1500,
-//   duration: 1.5,
-//   delay: 1,
-//   repeat: -1,
-//   yoyo: true,
-// });
-
-// gsap.to("#box3", {
-//   x: 1500,
-//   duration: 1.5,
-//   delay: 1,
-//   repeat: -1,
-//   yoyo: true,
-// });
-
-// navbar items
+// GSAP for navbar items
 let tl = gsap.timeline();
 
 tl.from("h2", {
@@ -39,33 +15,35 @@ tl.from("h4", {
   stagger: 0.5,
 });
 
-gsap.from("#PG1 #box", {
-  scale: 0,
-  duration: 2,
-  delay: 1,
-  rotate: 360
+tl.from("ul", {
+  y: -20,
+  opacity: 0,
+  duration: 1,
+  stagger: 0.5,
 });
 
-gsap.from("#PG2 #box", {
-  scale: 0,
-  duration: 2,
-  delay: 1,
-  rotate: 360,
-  scrollTrigger:{
-    trigger:"#PG2 #box",
-    scroller: "body",
-    markers:true
-  }
+
+let Path = "M 10 100 Q 500 100 1000 100";
+let finalPath = "M 10 100 Q 500 100 1000 100";
+
+const string = document.querySelector("#curve");
+string.addEventListener("mousemove", function(e) {
+  let Path = `M 10 100 Q ${e.x} ${e.y} 1000 100`;
+
+ 
+  
+  gsap.to("svg path", {
+    attr: { d: Path },
+     duration: 1.5, 
+    ease: "power3.out"
+  });
 });
 
-gsap.from("#PG3 #box", {
-  scale: 0,
-  duration: 2,
-  delay: 1,
-  rotate: 360,
-  scrollTrigger:{
-    trigger:"#PG3 #box",
-    scroller: "body",
-    markers:true
-  }
-});
+string.addEventListener("mouseleave", function() {
+ 
+  gsap.to("svg path", {
+    attr: { d: finalPath },
+    duration: 0.5, 
+    ease: "elastic.out(1, 0.5)"
+  });
+  });
